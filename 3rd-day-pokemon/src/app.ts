@@ -1,8 +1,6 @@
-// getElementById를 사용했을때 리턴값이 둘 중 하나로 자동으로 추론함. 그래서 안써줘도 무관
 const container: HTMLElement | null = document.getElementById("app");
-const pokemons: number = 100;
+const pokemons: number = 200;
 
-// 가져올 데이터 형식
 interface IPokemon {
   id: number;
   name: string;
@@ -10,16 +8,14 @@ interface IPokemon {
   type: string;
 }
 
-// 가져올 데이터 수만큼 getPokemon함수를 실행시켜줄 함수생성
-const fetchData = (): void => {
+const fetchData = async (): Promise<void> => {
   for (let i = 1; i <= pokemons; i++) {
-    getPokemon(i);
+    await getPokemon(i);
   }
 };
 
-// 비동기처리위해서 async함수를 사용 => return값에 promise사용
 const getPokemon = async (id: number): Promise<void> => {
-  const data: Response = await fetch(`http://pokeapi.co/api/v2/pokemon/${id}`);
+  const data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   // json형태로 한 번 더 가공필, 데이터가 너무 많아서 any타입사용
   const pokemon: any = await data.json();
   const pokemonType: string = pokemon.types
@@ -36,3 +32,21 @@ const getPokemon = async (id: number): Promise<void> => {
 
   showPokemon(transformedPokemon);
 };
+
+const showPokemon = (pokemon: IPokemon): void => {
+  let output: string = `
+    <div class="card">
+        <span class="card--id">#${pokemon.id}</span>
+        <img class="card--image" src=${pokemon.image} alt=${pokemon.name} />
+        <h1 class="card--name">${pokemon.name}</h1>
+        <span class="card--details">${pokemon.type}</span>
+    </div>
+  `;
+
+  // container의 type이 null일수도 있기때문에 null이 아닐경우에만 넣어주도록 지정
+  if (container) {
+    container.innerHTML += output;
+  }
+};
+
+fetchData();
