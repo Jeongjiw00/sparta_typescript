@@ -3,7 +3,14 @@ const puppeteer = require("puppeteer");
 // 데이터를 저장하기 위해 fs모듈
 const fs = require("fs");
 
-async function scrape() {
+interface IPokemon {
+  id: number;
+  name: string;
+  image: string;
+  type: string;
+}
+
+async function scrape(): Promise<any> {
   try {
     // 크로미움으로 브라우저를 연다.
     const browser = await puppeteer.launch();
@@ -26,7 +33,7 @@ async function scrape() {
     const cards = await page.$$(".card");
     // 100개의 카드가 잘 저장되었는지 확인.
     console.log(cards.length);
-    const data = [];
+    const data: Array<IPokemon> = [];
 
     // cards 돌면서 필요한 데이터 수집
     for (const card of cards) {
@@ -35,12 +42,9 @@ async function scrape() {
         el.getAttribute("src")
       );
       const name = await card.$eval(".card--name", (el) => el.textContent);
-      const details = await card.$eval(
-        ".card--details",
-        (el) => el.textContent
-      );
+      const type = await card.$eval(".card--details", (el) => el.textContent);
       // data 배열에 수집한 데이터 등록
-      data.push({ id, image, name, details });
+      data.push({ id, image, name, type });
     }
 
     // 페이지와 브라우저 종료
