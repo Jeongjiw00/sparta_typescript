@@ -1,6 +1,6 @@
 interface IStack<T> {
   push(item: T): void;
-  pop(): T | undefined;
+  pop(): T | void;
   peek(): T | undefined;
   size(): number;
 }
@@ -19,7 +19,11 @@ class Stack<T> implements IStack<T> {
     this.storage.push(item);
   }
 
-  pop(): T | undefined {
+  pop(): T | void {
+    // this.storage.pop() === undefined
+    if (this.size() === 0) {
+      throw Error("stack is empty");
+    }
     return this.storage.pop();
   }
 
@@ -39,17 +43,18 @@ numberStack.push(3);
 numberStack.push(100);
 
 const stringStack = new Stack<string>();
-stringStack.push("hello");
-stringStack.push("world");
-stringStack.push("!");
-stringStack.push("!");
+stringStack.pop();
+// stringStack.push("hello");
+// stringStack.push("world");
+// stringStack.push("!");
+// stringStack.push("!");
 
-console.log(numberStack.peek()); // 100
-console.log(numberStack.size()); // 4
+// console.log(numberStack.peek()); // 100
+// console.log(numberStack.size()); // 4
 
-console.log(stringStack.peek()); // "!"
-console.log(stringStack.size()); // 4
+// console.log(stringStack.peek()); // "!"
+// console.log(stringStack.size()); // 4
 
-numberStack.push(101); // ❌ Error: stack is full
+// numberStack.push(101); // ❌ Error: stack is full
 
 //Queue
