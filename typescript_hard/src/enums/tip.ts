@@ -9,3 +9,13 @@ const pepper = Red;
 console.log(Green); // "Green"
 console.log(ImBlue); // "Blue"
 // console.log(Blue); // Cannot find name 'Blue'. -> 상수의 이름을 바꿨으니 에러가 납니다
+
+//tree shaking
+// index.ts
+const enum Color {
+  Red = "Red",
+  Green = "Green",
+  Blue = "Blue",
+}
+
+const green = Color.Green;
