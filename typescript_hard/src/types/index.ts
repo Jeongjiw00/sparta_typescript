@@ -27,3 +27,15 @@ export type User = {
   email: string;
   name: string;
 };
+
+export enum Status {
+  Initiated = "Initiated",
+  Pending = "Pending",
+  Shipped = "Shipped",
+  Delivered = "Delivered",
+}
+
+export interface Order {
+  buyer: string;
+  orderStatus: Status;
+}
