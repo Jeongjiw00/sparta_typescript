@@ -1,7 +1,4 @@
-type User = {
-  email: string;
-  name: string;
-};
+import { User } from "../types";
 
 function getData<T>(data: T): T {
   return data;

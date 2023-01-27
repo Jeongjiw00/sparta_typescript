@@ -22,3 +22,8 @@ export interface IThingsInLife {
 //   colorOfPen: Color;
 //   keyboardArrow: Direction;
 // };
+
+export type User = {
+  email: string;
+  name: string;
+};
