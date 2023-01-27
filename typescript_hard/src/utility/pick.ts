@@ -17,3 +17,5 @@ const studentName: StudentName = {
   },
   isGraduated: true,
 };
+
+console.log(studentName);

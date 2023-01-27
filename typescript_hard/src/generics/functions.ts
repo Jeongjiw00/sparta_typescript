@@ -32,3 +32,4 @@ console.log(orders);
 //     orderStatus: status,
 //   };
 // });
+// console.log(ordersE);

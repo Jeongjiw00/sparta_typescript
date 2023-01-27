@@ -38,7 +38,18 @@ numberStack.push(2);
 numberStack.push(3);
 numberStack.push(100);
 
+const stringStack = new Stack<string>();
+stringStack.push("hello");
+stringStack.push("world");
+stringStack.push("!");
+stringStack.push("!");
+
 console.log(numberStack.peek()); // 100
 console.log(numberStack.size()); // 4
 
+console.log(stringStack.peek()); // "!"
+console.log(stringStack.size()); // 4
+
 numberStack.push(101); // ❌ Error: stack is full
+
+//Queue

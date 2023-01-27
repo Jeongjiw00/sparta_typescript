@@ -1,4 +1,7 @@
-type MyType2 = "dog" | "cat" | "alpaca";
-type ExtractedType = Extract<MyType, "alpaca" | "cat">;
+type MyPet = "dog" | "cat" | "alpaca";
+type ExtractedMyPet = Extract<MyPet, "alpaca" | "cat">;
 
-const onlyAlpacaOrCatAllowed: ExtractedType = "cat"; // 또는 "alpaca"만 할당 가능
+const onlyAlpacaOrCatAllowed1: ExtractedMyPet = "cat"; // 또는 "alpaca"만 할당 가능
+// const onlyAlpacaOrCatAllowed2: ExtractedMyPet = "dog"; // error
+
+console.log(onlyAlpacaOrCatAllowed1);
